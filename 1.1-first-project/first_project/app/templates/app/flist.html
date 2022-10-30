@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Список файлов в директории first_project</title>
+</head>
+<body>
+    <h1>Список файлов</h1>
+    {% for filename in flist %}
+        <p> {{ filename }} </p>
+    {% endfor %}
+    <a href="{% url 'home'  %}"><button>На главную</button></a>
+</body>
+</html>
