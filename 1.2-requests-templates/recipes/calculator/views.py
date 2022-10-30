@@ -16,15 +16,19 @@ DATA = {
         'сыр, ломтик': 1,
         'помидор, ломтик': 1,
     },
-    # можете добавить свои рецепты ;)
+    'apple_pie': {
+        'яйца, шт': 4,
+        'ванилин, пакетик': 1,
+        'сахар, г': 250,
+        'мука, г': 250,
+    },
 }
 
-# Напишите ваш обработчик. Используйте DATA как источник данных
-# Результат - render(request, 'calculator/index.html', context)
-# В качестве контекста должен быть передан словарь с рецептом:
-# context = {
-#   'recipe': {
-#     'ингредиент1': количество1,
-#     'ингредиент2': количество2,
-#   }
-# }
+def recipe_view(request, recipe='omlet'):
+    template_name = 'calculator/index.html'
+    servings = int(request.GET.get('servings', 1))
+    dict = DATA[recipe].copy()
+    for ingredient in dict.keys():
+        dict[ingredient] = dict[ingredient] * servings
+    return render(request, template_name, {'recipe': dict})
+
